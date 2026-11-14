@@ -1,0 +1,36 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "aegis-swarm-kernel"
+version = "1.0.0"
+description = "Deterministic Multi-Agent DAG Orchestrator, Hybrid Model Router, Financial Circuit Breaker, and Transactional Workspace MCP Kernel"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "fastmcp>=0.2.0",
+    "mcp>=1.0.0",
+    "qdrant-client>=1.9.0",
+    "pydantic>=2.7.0",
+    "pydantic-settings>=2.2.0",
+    "uvicorn>=0.29.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.23.0",
+]
+
+[project.scripts]
+aegis-swarm-kernel = "aegis_swarm.server:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/aegis_swarm"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+pythonpath = ["src", "."]
+testpaths = ["tests"]
+
